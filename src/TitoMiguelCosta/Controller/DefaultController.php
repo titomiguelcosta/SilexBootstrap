@@ -11,9 +11,9 @@ use Silex\Application;
  *
  * @author titomiguelcosta
  */
-class Main
+class DefaultController
 {
-    public function index(Application $app)
+    public function indexAction(Application $app)
     {
         return $app['twig']->render('index.html.twig', array());
     }

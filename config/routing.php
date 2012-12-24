@@ -1,2 +1,2 @@
 <?php
-$app->get('/', 'TitoMiguelCosta\Controller\Main::index')->bind('homepage');
+$app->get('/', 'TitoMiguelCosta\Controller\DefaultController::indexAction')->bind('homepage');
