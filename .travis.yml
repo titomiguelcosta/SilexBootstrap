@@ -3,11 +3,13 @@ language: php
 php:
     - 5.4
 
-script:
+before_script:
     - composer self-update
     - composer install --dev --prefer-dist
     - cd web
     - php -S localhost:8000
+
+script:
     - php vendor/bin/phpunit
     - php vendor/bin/behat
 
