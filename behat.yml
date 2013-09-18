@@ -2,10 +2,8 @@ default:
     context:
         parameters:
             url: http://localhost:8888
-
             # Path to the document root
             documentRoot: web
-
             # How many seconds will we allow the httpd to use when starting?
             timeout: 1
 

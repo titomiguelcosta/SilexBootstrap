@@ -7,7 +7,6 @@ use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
-
 use Behat\MinkExtension\Context\MinkContext;
 
 /**
@@ -15,6 +14,7 @@ use Behat\MinkExtension\Context\MinkContext;
  */
 class FeatureContext extends MinkContext
 {
+
     /**
      * Pid for the web server
      *
@@ -27,7 +27,8 @@ class FeatureContext extends MinkContext
      *
      * @BeforeSuite
      */
-    public static function setUp(SuiteEvent $event) {
+    public static function setUp(SuiteEvent $event)
+    {
         // Fetch config
         $params = $event->getContextParameters();
         $url = parse_url($params['url']);
@@ -39,9 +40,7 @@ class FeatureContext extends MinkContext
 
         // Try to start the web server
         self::$pid = self::startBuiltInHttpd(
-            $url['host'],
-            $port,
-            $params['documentRoot']
+                        $url['host'], $port, $params['documentRoot']
         );
 
         if (!self::$pid) {
@@ -62,10 +61,9 @@ class FeatureContext extends MinkContext
         if (!$connected) {
             self::killProcess(self::$pid);
             throw new RuntimeException(
-                sprintf(
-                    'Could not connect to the web server within the given timeframe (%d second(s))',
-                    $params['timeout']
-                )
+            sprintf(
+                    'Could not connect to the web server within the given timeframe (%d second(s))', $params['timeout']
+            )
             );
         }
     }
@@ -75,7 +73,8 @@ class FeatureContext extends MinkContext
      *
      * @AfterSuite
      */
-    public static function tearDown(SuiteEvent $event) {
+    public static function tearDown(SuiteEvent $event)
+    {
         if (self::$pid) {
             self::killProcess(self::$pid);
         }
@@ -86,7 +85,8 @@ class FeatureContext extends MinkContext
      *
      * @param int $pid
      */
-    private static function killProcess($pid) {
+    private static function killProcess($pid)
+    {
         exec('kill ' . (int) $pid);
     }
 
@@ -97,9 +97,12 @@ class FeatureContext extends MinkContext
      * @param int $port The port to use
      * @return boolean
      */
-    private static function canConnectToHttpd($host, $port) {
+    private static function canConnectToHttpd($host, $port)
+    {
         // Disable error handler for now
-        set_error_handler(function() { return true; });
+        set_error_handler(function() {
+                    return true;
+                });
 
         // Try to open a connection
         $sp = fsockopen($host, $port);
@@ -124,12 +127,10 @@ class FeatureContext extends MinkContext
      * @param string $documentRoot The document root
      * @return int Returns the PID of the httpd
      */
-    private static function startBuiltInHttpd($host, $port, $documentRoot) {
+    private static function startBuiltInHttpd($host, $port, $documentRoot)
+    {
         // Build the command
-        $command = sprintf('php -S %s:%d -t %s >/dev/null 2>&1 & echo $!',
-                            $host,
-                            $port,
-                            $documentRoot);
+        $command = sprintf('php -S %s:%d -t %s >/dev/null 2>&1 & echo $!', $host, $port, $documentRoot);
 
         $output = array();
         exec($command, $output);
