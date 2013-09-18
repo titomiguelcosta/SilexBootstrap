@@ -1,4 +1,4 @@
 *~
-nbproject
-data/cache
-vendor
+/nbproject
+/data/cache
+/vendor

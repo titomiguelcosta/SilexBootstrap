@@ -1,0 +1,15 @@
+language: php
+
+php:
+    - 5.4
+
+script:
+    - composer self-update
+    - composer install --dev --prefer-dist
+    - cd web
+    - php -S localhost:8000
+    - php vendor/bin/phpunit
+    - php vendor/bin/behat
+
+notifications:
+    email: true
