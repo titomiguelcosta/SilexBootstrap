@@ -6,8 +6,6 @@ php:
 before_script:
     - composer self-update
     - composer install --dev --prefer-dist
-    - cd web
-    - php -S localhost:8000
 
 script:
     - php vendor/bin/phpunit

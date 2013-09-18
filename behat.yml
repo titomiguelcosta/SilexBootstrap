@@ -1,8 +1,15 @@
 default:
     context:
         parameters:
+            url: http://localhost:8888
+
+            # Path to the document root
+            documentRoot: web
+
+            # How many seconds will we allow the httpd to use when starting?
+            timeout: 1
 
     extensions:
         Behat\MinkExtension\Extension:
             goutte: ~
-            base_url: http://localhost:8000/
+            base_url: http://localhost:8888/
